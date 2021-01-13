@@ -16,6 +16,14 @@ mongo = PyMongo(app)
 def welcome():
   return 'welcome'
 
+@app.route('/users', methods=['GET'])
+def get_users():
+
+    users = mongo.db.users.find()
+    response = json_util.dumps(users)
+
+    return Response(response, mimetype='application/json'), 200
+
 @app.route('/users', methods=['POST'])
 def create_user():
 
@@ -44,16 +52,6 @@ def create_user():
 
     else:
         return not_found()
-
-
-@app.route('/users', methods=['GET'])
-def get_users():
-
-    users = mongo.db.users.find()
-    response = json_util.dumps(users)
-
-    return Response(response, mimetype='application/json'), 200
-
 
 @app.errorhandler(404)
 def not_found(error=None):

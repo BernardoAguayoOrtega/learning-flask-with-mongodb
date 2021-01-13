@@ -4,6 +4,7 @@ from flask_pymongo import PyMongo
 from flask import request
 from werkzeug.security import generate_password_hash, check_password_hash
 from bson import json_util
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 
@@ -41,14 +42,16 @@ def create_user():
     else:
         return not_found()
 
+
 @app.route('/users', methods=['GET'])
 def get_users():
 
-  users = mongo.db.users.find()
-  response = json_util.dumps(users)
-  
-  return Response(response, mimetype='application/json'), 200 
-  
+    users = mongo.db.users.find()
+    response = json_util.dumps(users)
+
+    return Response(response, mimetype='application/json'), 200
+
+
 @app.errorhandler(404)
 def not_found(error=None):
     message = {
@@ -57,6 +60,16 @@ def not_found(error=None):
     }
 
     return message, 404
+
+
+@app.route('/users/<id>', methods=['GET'])
+def get_user_by_id(id):
+
+    user = mongo.db.users.find_one({'_id': ObjectId(id)})
+    
+    response = json_util.dumps(user)
+
+    return Response(response, mimetype='application/json')
 
 
 if __name__ == '__main__':

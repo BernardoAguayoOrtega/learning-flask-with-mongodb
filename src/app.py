@@ -12,6 +12,9 @@ app.config['MONGO_URI'] = 'mongodb+srv://dbAdmin:dbAdmin.@cluster0.zugnm.mongodb
 
 mongo = PyMongo(app)
 
+@app.route('/')
+def welcome():
+  return 'welcome'
 
 @app.route('/users', methods=['POST'])
 def create_user():

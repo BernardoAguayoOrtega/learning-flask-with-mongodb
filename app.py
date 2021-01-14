@@ -1,5 +1,4 @@
 from flask import Flask, Response
-from flask.json import dumps
 from flask_pymongo import PyMongo
 from flask import request
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -74,7 +73,7 @@ def get_user_by_id(id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
 
 # dbAdmin
 # dbAdmin.

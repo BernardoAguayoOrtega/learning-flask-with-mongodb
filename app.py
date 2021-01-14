@@ -8,7 +8,7 @@ from bson.objectid import ObjectId
 
 app = Flask(__name__)
 
-app.config['MONGO_URI'] = "mongodb+srv://dbAdmin:dbAdmin.@cluster0.zugnm.mongodb.net/database?retryWrites=true&w=majority"
+app.config['MONGO_URI'] = 'mongodb+srv://dbAdmin:dbAdmin.@cluster0.zugnm.mongodb.net/database?retryWrites=true&w=majority'
 
 mongo = PyMongo(app)
 
@@ -74,7 +74,7 @@ def get_user_by_id(id):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
 
 # dbAdmin
 # dbAdmin.
